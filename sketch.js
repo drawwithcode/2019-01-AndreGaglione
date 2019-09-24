@@ -1,30 +1,26 @@
 function preload(){
-  // put preload code here
-}
 
+}
 function setup() {
+
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
 
-  frameRate(12);
+  frameRate(120);
 
-  background(100);
+  background(200);
+
 }
 
 function draw() {
-  translate(width/2, height/2)
-  rotate(frameCount*3);
+  translate(width/2, height/2);
+  rotate(frameCount*4);
   noFill();
 
-  stroke(
-    lerpColor(
-      color("aquamarine"),
-      color("tomato"),
-      frameCount/120));
+  stroke(color="black");
+  line(-60, 0, cos(frameCount), sin(frameCount));
 
-  ellipse(100, 0, 250);
-
-  if(frameCount==120){
+  if(frameCount==90){
     noLoop();
   }
 
