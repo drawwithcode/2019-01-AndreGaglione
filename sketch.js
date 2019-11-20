@@ -1,28 +1,35 @@
-function preload(){
+var alpha = 0; // Orientation around Z axis
+var beta = 0; // Orientation around X axis
+var gamma = 0; // Orientation around Y axis
 
-}
 function setup() {
-
-  createCanvas(windowWidth,windowHeight);
-    angleMode(DEGREES);
-
-    background(200);
-    frameRate(120);
+	createCanvas(windowWidth, windowHeight);
+  if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', onOrientationChange);
+  }
+  background(255,255,255);
+  angleMode(DEGREES);
+  rectMode(CENTER);
+  img = loadImage('freccia.jpg'); // Load the image
 }
 
 function draw() {
 
 
-    push();
-    textSize(20);
-        text("In viaggio verso Roma, non ci sono a lezione ma è per una buona causa", width/4, height/6.4);
+  textSize(30);
+  textAlign(CENTER, CENTER);
+  text('try this compass', width/2, height/4);
+  push();
+  	translate(width/2, height/2);
+  	rotate(-alpha);
+	image(img, 0, 0, img.width / 3, img.height / 3);
+  pop();
+}
 
-    var k = 50;
+function onOrientationChange(e) {
+  alpha = e.alpha;
+  beta = e.beta;
+  gamma = e.gamma;
 
-    if(frameCount < 100){
-      translate(width/2,height/2);
-      stroke("black");
-      line(k, 0, (k)*cos(frameCount*4), (k)*sin(frameCount*4));
-    }
-
+  println(alpha + " " + beta + " " + gamma);
 }
